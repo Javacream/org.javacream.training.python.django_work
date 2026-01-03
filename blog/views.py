@@ -1,9 +1,13 @@
 
 from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render
 from django.views import View
 
 def home(request):
-    return HttpResponse("Hello Django")
+    return render(request, "blog/home.html")
+
+def about(request):
+    return render(request, "blog/about.html")
 
 class PingView(View):
     def get(self, request):
