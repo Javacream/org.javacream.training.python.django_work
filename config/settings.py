@@ -1,11 +1,17 @@
 
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "dev-only-secret-key"
-DEBUG = True
-ALLOWED_HOSTS = []
+# In production: set DJANGO_SECRET_KEY in environment
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-secret-key")
+
+# In production: set DJANGO_DEBUG=0
+DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
+
+# In production: set DJANGO_ALLOWED_HOSTS="example.com,www.example.com"
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h.strip()]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -59,8 +65,9 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Simple console logging (good default for dev/training)
 LOGGING = {
