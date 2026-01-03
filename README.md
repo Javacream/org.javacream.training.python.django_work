@@ -86,3 +86,12 @@ Ziel des Seminars ist es, eine vollständige Django-Webanwendung zu entwickeln u
 - Umgang mit Settings in Produktion
 - Security-Grundlagen
 - Nächste Schritte (APIs, Async, Skalierung)
+
+## Start
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install django
+python manage.py migrate
+python manage.py runserver
+```
